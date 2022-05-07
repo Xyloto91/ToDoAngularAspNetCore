@@ -230,5 +230,5 @@ _Pvt_Extensions
 # FAKE - F# Make
 .fake/
 
-# Angluar cache
-.angular/cache/
+# Miscellaneous
+/.angular/cache 
