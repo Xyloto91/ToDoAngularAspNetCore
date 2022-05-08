@@ -1,0 +1,47 @@
+<div class="column is-two-fifths">
+  <form (submit) ="onSubmit()">
+    <div class="field">
+      <label class="label">Title</label>
+      <div class="control">
+        <input class="input" type="text" placeholder="Enter title" [(ngModel)]="title" name="title" value="{{title}}" />
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Content</label>
+      <div class="control">
+        <textarea class="textarea" type="text" placeholder="Enter content" [(ngModel)]="content" name="content">{{content}}</textarea>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Created</label>
+      <div class="control">
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" [(ngModel)]="created" name="created">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker color="primary"></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="control">
+        <label class="checkbox">
+          <input type="checkbox" [(ngModel)]="isCompleted" [checked]="isCompleted" name="isCompleted">
+          Completed
+        </label>
+      </div>
+    </div>
+
+    <div class="field is-grouped">
+      <div class="control">
+        <input type="submit" class="button is-link" value="Submit"/>
+      </div>
+      <div class="control">
+        <input type="button" class="button is-link is-light" (click)="cancel()" value="Cancel" />
+      </div>
+    </div>
+  </form>
+</div>
+
