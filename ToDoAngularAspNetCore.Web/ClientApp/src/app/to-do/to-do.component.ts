@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-to-do',
@@ -14,7 +15,7 @@ export class ToDoComponent implements OnInit {
   created = new Date();
   isCompleted = false;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     console.log('Init');
@@ -22,7 +23,6 @@ export class ToDoComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log('Form data submited >>');
 
     const postData: ToDoModel = {
       id: 0,
@@ -37,16 +37,16 @@ export class ToDoComponent implements OnInit {
     this.http.post<ToDoModel>('https://localhost:7141/api/to-do', postData, { headers: headers }).subscribe(
       result =>
       {
+        let snackBarRef = this.snackBar;
         if (result != null) {
-          alert('To do successfully added in database.');
+          snackBarRef.open(`To do with title '${this.title}' successfully created.`);
         }
         else {
-          alert('To do did not added in database.');
+          snackBarRef.open(`To do with title '${this.title}' didn't create.`);
         }
       },
       error => console.error(error));
 
-    console.log('Form data submited <<');
   }
 
   cancel(): void {

@@ -8,6 +8,7 @@ import { MatNativeDateModule, MatRippleModule, MAT_DATE_LOCALE } from '@angular/
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -36,6 +37,7 @@ import { ToDoComponent } from './to-do/to-do.component';
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
+    MatSnackBarModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },

@@ -362,3 +362,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /ToDoAngularAspNetCore/ClientApp/.angular/cache/
+/ToDoAngularAspNetCore.Web/ClientApp/.angular/cache/13.3.5
