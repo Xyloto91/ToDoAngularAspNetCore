@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ToDoModel } from '../../models/to-do-model';
+import { Input } from '@angular/core';
 
 @Component({
   selector: 'app-to-do',
@@ -9,59 +11,51 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 
 export class ToDoComponent implements OnInit {
+  @Input() toDo: ToDoModel;
 
-  title = '';
-  content = '';
-  created = new Date();
-  isCompleted = false;
+  webApiUrl = '';
 
-  constructor(private http: HttpClient, private snackBar: MatSnackBar) { }
+  constructor(private http: HttpClient, private snackBar: MatSnackBar, @Inject('WEB_API_URL') webApiUrl: string) {
+    this.webApiUrl = webApiUrl;
+    this.toDo = window.history.state['toDo'];
+  }
 
   ngOnInit(): void {
-    console.log('Init');
-    console.log(this);
+    if (!this.toDo) {
+      this.toDo = new ToDoModel('', '', new Date(), false);
+    }
   }
 
   onSubmit(): void {
 
-    const postData: ToDoModel = {
-      id: 0,
-      title: this.title,
-      content: this.content,
-      created: this.created,
-      isCompleted: this.isCompleted
-    };
-
     const headers: HttpHeaders = new HttpHeaders();
     headers.set('Content-Type', 'application/json');
-    this.http.post<ToDoModel>('https://localhost:7141/api/to-do', postData, { headers: headers }).subscribe(
-      result =>
-      {
-        let snackBarRef = this.snackBar;
-        if (result != null) {
-          snackBarRef.open(`To do with title '${this.title}' successfully created.`);
-        }
-        else {
-          snackBarRef.open(`To do with title '${this.title}' didn't create.`);
-        }
-      },
-      error => console.error(error));
 
+    if (this.toDo.id) {
+      this.http.put<ToDoModel>(this.webApiUrl + 'api/to-do', this.toDo, { headers: headers }).subscribe(
+        result => {
+          let snackBarRef = this.snackBar;
+          if (result != null) {
+            snackBarRef.open(`To do with title '${this.toDo?.title}' successfully updated.`);
+          }
+          else {
+            snackBarRef.open(`To do with title '${this.toDo?.title}' didn't updated.`);
+          }
+        },
+        error => console.error(error));
+    }
+    else {
+      this.http.post<ToDoModel>(this.webApiUrl + 'api/to-do', this.toDo, { headers: headers }).subscribe(
+        result => {
+          let snackBarRef = this.snackBar;
+          if (result != null) {
+            snackBarRef.open(`To do with title '${this.toDo?.title}' successfully created.`);
+          }
+          else {
+            snackBarRef.open(`To do with title '${this.toDo?.title}' didn't create.`);
+          }
+        },
+        error => console.error(error));
+    }
   }
-
-  cancel(): void {
-    this.title = '';
-    this.content = '';
-    this.created = new Date();
-    this.isCompleted = false;
-  }
-
-}
-
-interface ToDoModel {
-  id?: number,
-  title: string,
-  content: string,
-  created: Date,
-  isCompleted: boolean
 }

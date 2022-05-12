@@ -3,14 +3,14 @@
     <div class="field">
       <label class="label">Title</label>
       <div class="control">
-        <input class="input" type="text" placeholder="Enter title" [(ngModel)]="title" name="title" value="{{title}}" />
+        <input class="input" type="text" placeholder="Enter title" [(ngModel)]="toDo.title" name="title" value="{{toDo.title}}" />
       </div>
     </div>
 
     <div class="field">
       <label class="label">Content</label>
       <div class="control">
-        <textarea class="textarea" type="text" placeholder="Enter content" [(ngModel)]="content" name="content">{{content}}</textarea>
+        <textarea class="textarea" style="resize: none;" type="text" placeholder="Enter content" [(ngModel)]="toDo.content" name="content">{{toDo.content}}</textarea>
       </div>
     </div>
 
@@ -18,7 +18,7 @@
       <label class="label">Created</label>
       <div class="control">
         <mat-form-field>
-          <input matInput [matDatepicker]="picker" [(ngModel)]="created" name="created">
+          <input matInput [matDatepicker]="picker" [(ngModel)]="toDo.created" name="created">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker color="primary"></mat-datepicker>
         </mat-form-field>
@@ -28,7 +28,7 @@
     <div class="field">
       <div class="control">
         <label class="checkbox">
-          <input type="checkbox" [(ngModel)]="isCompleted" [checked]="isCompleted" name="isCompleted">
+          <input type="checkbox" [(ngModel)]="toDo.isCompleted" [checked]="toDo.isCompleted" name="isCompleted">
           Completed
         </label>
       </div>
@@ -36,10 +36,10 @@
 
     <div class="field is-grouped">
       <div class="control">
-        <input type="submit" class="button is-link" value="Submit"/>
+        <input type="submit" class="button is-link" value="{{toDo.id ? 'Update' : 'Submit'}}"/>
       </div>
       <div class="control">
-        <input type="button" class="button is-link is-light" (click)="cancel()" value="Cancel" />
+        <a class="button is-link is-light" [routerLink]="['/']">Cancel</a>
       </div>
     </div>
   </form>

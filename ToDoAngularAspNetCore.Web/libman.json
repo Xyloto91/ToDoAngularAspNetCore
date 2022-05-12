@@ -5,6 +5,10 @@
     {
       "library": "bulma@0.9.3",
       "destination": "ClientApp/src/bulma/"
+    },
+    {
+      "library": "font-awesome@6.1.1",
+      "destination": "ClientApp/src/font-awesome/"
     }
   ]
 }

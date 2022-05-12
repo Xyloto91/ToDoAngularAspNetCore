@@ -1,0 +1,32 @@
+<div *ngIf="toDo">
+  <div class="card">
+    <header class="card-header">
+      <p class="card-header-title">
+        {{toDo.title}}
+      </p>
+    </header>
+    <div class="card-content">
+      <div class="content">
+        <div *ngIf="toDo.content.length > 25">
+          {{ toDo.content | slice:0:25 }}...
+        </div>
+        <div *ngIf="toDo.content.length < 25">
+          {{toDo.content}}
+        </div>
+        <br>
+        <time>{{toDo.created | date:'dd/MM/yyyy'}}</time>
+        <label class="checkbox" style="margin-left:20px">
+          <input type="checkbox" onclick="return false;" [checked]="toDo.isCompleted">
+          Completed
+        </label>
+      </div>
+    </div>
+    <footer class="card-footer centerize">
+      <div class="field is-grouped">
+        <p class="control">
+          <a href="#" class="button is-primary card-footer-item">Detail</a>
+        </p>
+      </div>
+    </footer>
+  </div>
+</div>

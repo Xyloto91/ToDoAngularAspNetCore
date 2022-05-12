@@ -24,6 +24,7 @@
   <ItemGroup>
     <Folder Include="ClientApp\.angular\cache\angular-webpack\" />
     <Folder Include="ClientApp\.angular\cache\babel-webpack\" />
+    <Folder Include="ClientApp\src\models\" />
   </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
