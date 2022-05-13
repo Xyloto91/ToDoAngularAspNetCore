@@ -17,5 +17,7 @@ namespace ToDoAngularAspNetCore.Core.Entities
         public DateTime Created { get; set; }
 
         public bool IsCompleted { get; set; }
+
+        public DateTime? CompletedDate { get; set; }
     }
 }

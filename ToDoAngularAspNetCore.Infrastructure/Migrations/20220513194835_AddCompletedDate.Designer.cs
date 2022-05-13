@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ToDoAngularAspNetCore.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using ToDoAngularAspNetCore.Infrastructure.Data;
 namespace ToDoAngularAspNetCore.Infrastructure.Migrations
 {
     [DbContext(typeof(ToDoAngularDbContext))]
-    partial class ToDoAngularDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220513194835_AddCompletedDate")]
+    partial class AddCompletedDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

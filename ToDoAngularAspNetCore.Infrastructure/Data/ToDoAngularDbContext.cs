@@ -1,20 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ToDoAngularAspNetCore.Core.Entities;
 
 namespace ToDoAngularAspNetCore.Infrastructure.Data
 {
+    //EntityFrameworkCore\Add-Migration
+    //EntityFrameworkCore\Update-Database
     public class ToDoAngularDbContext : DbContext
     {
         public DbSet<ToDo> ToDos { get; set; }
 
-        public ToDoAngularDbContext(DbContextOptions options) : base(options)   
+        public ToDoAngularDbContext(DbContextOptions<ToDoAngularDbContext> options) : base(options)   
         {
              
         }

@@ -33,3 +33,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin: 0 auto;
   text-align: center;
 }
+
+input.ng-invalid.ng-touched {
+  border: red 2px solid;
+}
+
+textarea.ng-invalid.ng-touched {
+  border: red 2px solid;
+}

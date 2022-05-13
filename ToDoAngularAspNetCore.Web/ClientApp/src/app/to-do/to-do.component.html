@@ -1,16 +1,16 @@
 <div class="column is-two-fifths">
-  <form (submit) ="onSubmit()">
+  <form (submit) ="onSubmit()" #form="ngForm">
     <div class="field">
       <label class="label">Title</label>
       <div class="control">
-        <input class="input" type="text" placeholder="Enter title" [(ngModel)]="toDo.title" name="title" value="{{toDo.title}}" />
+        <input class="input" type="text" required placeholder="Enter title" [(ngModel)]="toDo.title" name="title" value="{{toDo.title}}" />
       </div>
     </div>
 
     <div class="field">
       <label class="label">Content</label>
       <div class="control">
-        <textarea class="textarea" style="resize: none;" type="text" placeholder="Enter content" [(ngModel)]="toDo.content" name="content">{{toDo.content}}</textarea>
+        <textarea class="textarea" style="resize: none;" type="text" required placeholder="Enter content" [(ngModel)]="toDo.content" name="content">{{toDo.content}}</textarea>
       </div>
     </div>
 
@@ -18,25 +18,41 @@
       <label class="label">Created</label>
       <div class="control">
         <mat-form-field>
-          <input matInput [matDatepicker]="picker" [(ngModel)]="toDo.created" name="created">
+          <input matInput [matDatepicker]="picker" required [(ngModel)]="toDo.created" name="created">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker color="primary"></mat-datepicker>
         </mat-form-field>
       </div>
     </div>
 
-    <div class="field">
+    <div class="field" *ngIf="toDo.id">
       <div class="control">
         <label class="checkbox">
-          <input type="checkbox" [(ngModel)]="toDo.isCompleted" [checked]="toDo.isCompleted" name="isCompleted">
+          <input type="checkbox" [(ngModel)]="toDo.isCompleted" [checked]="toDo.isCompleted" name="isCompleted" (change)="setCompletedDate()">
           Completed
+        </label>
+      </div>
+    </div>
+
+    <div class="field" *ngIf="toDo.id">
+      <label class="label">Completed date</label>
+      <div class="control">
+        <label class="checkbox">
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker" required [(ngModel)]="toDo.completedDate" name="completedDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker color="primary"></mat-datepicker>
+          </mat-form-field>
         </label>
       </div>
     </div>
 
     <div class="field is-grouped">
       <div class="control">
-        <input type="submit" class="button is-link" value="{{toDo.id ? 'Update' : 'Submit'}}"/>
+        <input type="submit" class="button is-link" value="{{toDo.id ? 'Update' : 'Submit'}}" [disabled]="form.invalid" />
+      </div>
+      <div class="control" *ngIf="toDo.id">
+        <input type="submit" class="button is-link" value="Delete" (click)="onDelete()" />
       </div>
       <div class="control">
         <a class="button is-link is-light" [routerLink]="['/']">Cancel</a>
