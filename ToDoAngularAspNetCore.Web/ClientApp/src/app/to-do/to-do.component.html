@@ -3,7 +3,7 @@
     <div class="field">
       <label class="label">Title</label>
       <div class="control">
-        <input class="input" type="text" required placeholder="Enter title" [(ngModel)]="toDo.title" name="title" value="{{toDo.title}}" />
+        <input class="input" type="text" maxlength="28" required placeholder="Enter title" [(ngModel)]="toDo.title" name="title" value="{{toDo.title}}" />
       </div>
     </div>
 
@@ -39,7 +39,7 @@
       <div class="control">
         <label class="checkbox">
           <mat-form-field>
-            <input matInput [matDatepicker]="picker" required [(ngModel)]="toDo.completedDate" name="completedDate">
+            <input matInput [matDatepicker]="picker" [required]="toDo.isCompleted" [(ngModel)]="toDo.completedDate" name="completedDate">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker color="primary"></mat-datepicker>
           </mat-form-field>
@@ -52,7 +52,7 @@
         <input type="submit" class="button is-link" value="{{toDo.id ? 'Update' : 'Submit'}}" [disabled]="form.invalid" />
       </div>
       <div class="control" *ngIf="toDo.id">
-        <input type="submit" class="button is-link" value="Delete" (click)="onDelete()" />
+        <input type="button" class="button is-link" value="Delete" (click)="onDelete()" />
       </div>
       <div class="control">
         <a class="button is-link is-light" [routerLink]="['/']">Cancel</a>

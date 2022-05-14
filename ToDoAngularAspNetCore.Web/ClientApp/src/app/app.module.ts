@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -18,6 +19,7 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ToDoComponent } from './to-do/to-do.component';
 import { ToDoDetailComponent } from './to-do-detail/to-do-detail.component';
 import { ToDoCardComponent } from './to-do-card/to-do-card.component';
+import { ModalComponent, ModalContent } from './modal/modal.component';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import { ToDoCardComponent } from './to-do-card/to-do-card.component';
     FetchDataComponent,
     ToDoComponent,
     ToDoDetailComponent,
-    ToDoCardComponent
+    ToDoCardComponent,
+    ModalComponent,
+    ModalContent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -42,12 +46,16 @@ import { ToDoCardComponent } from './to-do-card/to-do-card.component';
     MatInputModule,
     MatDatepickerModule,
     MatSnackBarModule,
+    NgbModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'to-do', component: ToDoComponent }
     ])
+  ],
+  entryComponents: [
+    ModalComponent
   ],
   providers: [Window, { provide: MAT_DATE_LOCALE, useValue: 'hr' }, { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500, verticalPosition: 'top' } }],
   bootstrap: [AppComponent]

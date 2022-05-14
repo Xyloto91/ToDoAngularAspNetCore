@@ -41,3 +41,7 @@ input.ng-invalid.ng-touched {
 textarea.ng-invalid.ng-touched {
   border: red 2px solid;
 }
+
+body.modal-open {
+  padding-right: 0 !important;
+}

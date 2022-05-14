@@ -1,9 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ToDoModel } from '../../models/to-do-model';
-import { Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToDoModel } from '../../models/to-do-model';
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-to-do',
@@ -16,7 +16,7 @@ export class ToDoComponent implements OnInit {
 
   webApiUrl = '';
 
-  constructor(private http: HttpClient, private snackBar: MatSnackBar, private router: Router, @Inject('WEB_API_URL') webApiUrl: string) {
+  constructor(private http: HttpClient, private snackBar: MatSnackBar, private router: Router, private modalComponent: ModalComponent, @Inject('WEB_API_URL') webApiUrl: string) {
     this.webApiUrl = webApiUrl;
     this.toDo = window.history.state['toDo'];
   }
@@ -51,14 +51,8 @@ export class ToDoComponent implements OnInit {
   }
 
   onDelete(): void {
-    const headers: HttpHeaders = new HttpHeaders();
-    headers.set('Content-Type', 'application/json');
-
-    this.http.delete<ToDoModel>(this.webApiUrl + 'api/to-do/' + this.toDo.id, { headers: headers }).subscribe(
-      result => {
-        this.router.navigate(['/']);
-      },
-      error => console.error(error));
+    this.modalComponent.toDo = this.toDo;
+    this.modalComponent.open();
   }
 
   setCompletedDate(): void {
