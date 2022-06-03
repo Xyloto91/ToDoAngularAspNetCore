@@ -1,7 +1,7 @@
 <p *ngIf="!toDos"><em>Loading...</em></p>
 
 <section class="section centerize">
-  <div *ngIf="toDos.length == 0">
+  <div *ngIf="toDos?.length == 0">
     <h2>Feel so empty, please add your first to do task :)</h2>
   </div>
   <div class="container-grid">

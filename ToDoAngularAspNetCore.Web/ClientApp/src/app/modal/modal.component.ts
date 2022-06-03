@@ -3,6 +3,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToDoModel } from '../../models/to-do-model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-modal-content',
@@ -38,7 +39,7 @@ export class ModalComponent implements OnInit {
   toDo?: ToDoModel;
   webApiUrl = '';
 
-  constructor(private modalService: NgbModal, private http: HttpClient, private router: Router, @Inject('WEB_API_URL') webApiUrl: string) { this.webApiUrl = webApiUrl; }
+  constructor(private modalService: NgbModal, private http: HttpClient, private router: Router, private snackBar: MatSnackBar, @Inject('WEB_API_URL') webApiUrl: string) { this.webApiUrl = webApiUrl; }
 
   ngOnInit() {
     
@@ -52,9 +53,15 @@ export class ModalComponent implements OnInit {
         const headers: HttpHeaders = new HttpHeaders();
         headers.set('Content-Type', 'application/json');
 
-        this.http.delete<ToDoModel>(this.webApiUrl + 'api/to-do/' + this.toDo?.id, { headers: headers }).subscribe(
+        this.http.delete<ToDoModel>(this.webApiUrl + 'api/to-do/' + this.toDo?.id, { headers: headers, observe: 'response' }).subscribe(
           result => {
-            this.router.navigate(['/']);
+            if (result.status == 200) {
+              this.router.navigate(['/']);
+            }
+            else {
+              let snackBarRef = this.snackBar;
+              snackBarRef.open(`Couldn't delete to do data!`);
+            }
           },
           error => console.error(error));
       }

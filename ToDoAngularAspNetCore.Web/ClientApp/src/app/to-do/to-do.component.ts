@@ -32,18 +32,28 @@ export class ToDoComponent implements OnInit {
     headers.set('Content-Type', 'application/json');
 
     if (this.toDo.id) {
-      this.http.put<ToDoModel>(this.webApiUrl + 'api/to-do', this.toDo, { headers: headers }).subscribe(
+      this.http.put<ToDoModel>(this.webApiUrl + 'api/to-do', this.toDo, { headers: headers, observe: 'response' }).subscribe(
         result => {
           let snackBarRef = this.snackBar;
-          snackBarRef.open(`To do with title '${this.toDo?.title}' successfully updated.`);
+          if (result.status == 200) {
+            snackBarRef.open(`To do with title '${this.toDo?.title}' successfully updated.`);
+          }
+          else {
+            snackBarRef.open(`To do with title '${this.toDo?.title}' didn't update!`);
+          }
         },
         error => console.error(error));
     }
     else {
-      this.http.post<ToDoModel>(this.webApiUrl + 'api/to-do', this.toDo, { headers: headers }).subscribe(
+      this.http.post<ToDoModel>(this.webApiUrl + 'api/to-do', this.toDo, { headers: headers, observe: 'response' }).subscribe(
         result => {
           let snackBarRef = this.snackBar;
-          snackBarRef.open(`To do with title '${this.toDo?.title}' successfully created.`);
+          if (result.status == 200) {
+            snackBarRef.open(`To do with title '${this.toDo?.title}' successfully created.`);
+          }
+          else {
+            snackBarRef.open(`To do with title '${this.toDo?.title}' didn't create.`);
+          }
           this.router.navigate(['/']);
         },
         error => console.error(error));

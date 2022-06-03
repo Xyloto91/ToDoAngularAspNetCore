@@ -16,9 +16,9 @@ namespace ToDoAngularAspNetCore.Api.Controllers
         }
 
         [HttpGet()]
-        public async Task<IEnumerable<ToDoModel>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            return await _toDoService.GetToDos();
+            return Ok(await _toDoService.GetToDos());
         }
 
         [HttpGet("{id}")]
