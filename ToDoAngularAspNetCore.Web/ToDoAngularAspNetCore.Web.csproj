@@ -29,6 +29,7 @@
   <ItemGroup>
     <Folder Include="ClientApp\.angular\cache\angular-webpack\" />
     <Folder Include="ClientApp\.angular\cache\babel-webpack\" />
+    <Folder Include="ClientApp\src\services\" />
   </ItemGroup>
 
   <ItemGroup>
