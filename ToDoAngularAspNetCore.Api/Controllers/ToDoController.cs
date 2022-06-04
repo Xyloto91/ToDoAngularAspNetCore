@@ -22,27 +22,31 @@ namespace ToDoAngularAspNetCore.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ToDoModel> GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            return await _toDoService.GetToDoById(id);
+            return Ok(await _toDoService.GetToDoById(id));
         }
 
         [HttpPost()]
-        public async Task<ToDoModel> Create([FromBody]ToDoModel model)
+        public async Task<IActionResult> Create([FromBody]ToDoModel model)
         {
-            return await _toDoService.Create(model);
+            return Ok(await _toDoService.Create(model));
         }
 
         [HttpPut]
-        public async Task Update([FromBody] ToDoModel model)
+        public async Task<IActionResult> Update([FromBody] ToDoModel model)
         {
             await _toDoService.Update(model);
+
+            return Ok();
         }
 
         [HttpDelete("{id}")]
-        public async Task DeleteById(int id)
+        public async Task<IActionResult> DeleteById(int id)
         {
             await _toDoService.Delete(id);
+
+            return Ok();
         }
 
     }

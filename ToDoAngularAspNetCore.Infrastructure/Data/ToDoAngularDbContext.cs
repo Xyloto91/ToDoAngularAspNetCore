@@ -1,13 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.Extensions.Configuration;
 using ToDoAngularAspNetCore.Core.Entities;
 
 namespace ToDoAngularAspNetCore.Infrastructure.Data
 {
+    //Check if there is package Microsoft.EntityFrameworkCore.Tools in project 
     //EntityFrameworkCore\Add-Migration
     //EntityFrameworkCore\Update-Database
-    public class ToDoAngularDbContext : DbContext
+    public class ToDoAngularDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<ToDo> ToDos { get; set; }
 
@@ -19,7 +21,7 @@ namespace ToDoAngularAspNetCore.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ToDo>(ConfigureToDo);
-            //base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

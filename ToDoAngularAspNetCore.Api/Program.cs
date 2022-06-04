@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ToDoAngularAspNetCore.Application.Services;
+using ToDoAngularAspNetCore.Core.Entities;
 using ToDoAngularAspNetCore.Infrastructure.Data;
 using ToDoAngularAspNetCore.Infrastructure.Repository;
 
@@ -12,7 +13,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<ToDoAngularDbContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("ToDoAngluarAspNetCoreConnection")));
+builder.Services.AddDbContext<ToDoAngularDbContext>(x => 
+    x.UseSqlServer(builder.Configuration.GetConnectionString("ToDoAngluarAspNetCoreConnection")));
+
+builder.Services.AddDefaultIdentity<ApplicationUser>()
+                .AddEntityFrameworkStores<ToDoAngularDbContext>();
+
 builder.Services.AddScoped<ToDoRepository>();
 builder.Services.AddScoped<ToDoService>();
 
@@ -30,6 +36,8 @@ app.UseCors(options => options.WithOrigins("https://localhost:44426")
                               .AllowAnyHeader());
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
