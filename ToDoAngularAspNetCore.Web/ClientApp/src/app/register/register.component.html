@@ -1,0 +1,24 @@
+<div class="column is-two-fifths">
+  <form (submit)="onSubmit()" #form="ngForm">
+    <div class="field">
+      <label class="label">E-Mail</label>
+      <div class="control">
+        <input class="input" type="text" required placeholder="Enter e-Mail" [(ngModel)]="register.email" name="email" />
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Password</label>
+      <div class="control">
+        <input class="input" type="password" required placeholder="Enter password" [(ngModel)]="register.password" name="password" />
+      </div>
+    </div>
+
+    <div class="field is-grouped">
+      <div class="control">
+        <input type="submit" class="button is-link" value="Submit" [disabled]="form.invalid" />
+      </div>
+    </div>
+  </form>
+</div>
+

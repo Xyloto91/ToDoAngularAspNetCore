@@ -17,6 +17,7 @@ namespace ToDoAngularAspNetCore.Core.Entities
         public ApplicationUser(string email)
         {
             Email = email;
+            UserName = email;
         }
     }
 }

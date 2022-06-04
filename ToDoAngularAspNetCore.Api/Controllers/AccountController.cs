@@ -21,7 +21,7 @@ namespace ToDoAngularAspNetCore.Api.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> RegisterUser(RegisterModel registerModel)
+        public async Task<IActionResult> Register(RegisterModel registerModel)
         {
             var result = await _userManager.CreateAsync(new ApplicationUser(registerModel.Email), registerModel.Password);
 
@@ -34,9 +34,10 @@ namespace ToDoAngularAspNetCore.Api.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> LoginUser(LoginModel loginModel)
+        public async Task<IActionResult> Login(LoginModel loginModel)
         {
-            var result = await _signInManager.PasswordSignInAsync(new ApplicationUser(loginModel.Email), loginModel.Password, false, false);
+            var appUser = await _userManager.FindByEmailAsync(loginModel.Email);
+            var result = await _signInManager.PasswordSignInAsync(appUser.UserName, loginModel.Password, false, false);
 
             if (result.Succeeded)
             {
@@ -44,6 +45,14 @@ namespace ToDoAngularAspNetCore.Api.Controllers
             }
 
             return BadRequest("Invalid login details!");
+        }
+
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+
+            return Ok();
         }
     }
 }

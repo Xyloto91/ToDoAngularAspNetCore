@@ -22,9 +22,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\models\login-model.ts" />
+    <None Remove="ClientApp\src\models\register-model.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="ClientApp\.angular\cache\angular-webpack\" />
     <Folder Include="ClientApp\.angular\cache\babel-webpack\" />
-    <Folder Include="ClientApp\src\models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\models\login-model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\models\register-model.ts" />
   </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

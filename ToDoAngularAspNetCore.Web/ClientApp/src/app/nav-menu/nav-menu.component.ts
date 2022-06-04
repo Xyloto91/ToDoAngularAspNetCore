@@ -15,4 +15,8 @@ export class NavMenuComponent {
   toggle() {
     this.isExpanded = !this.isExpanded;
   }
+
+  logout() {
+    console.log('User logout!');
+  }
 }

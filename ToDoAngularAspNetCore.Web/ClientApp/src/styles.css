@@ -45,3 +45,7 @@ textarea.ng-invalid.ng-touched {
 body.modal-open {
   padding-right: 0 !important;
 }
+
+.nav-item{
+    margin-right: 10px;
+}

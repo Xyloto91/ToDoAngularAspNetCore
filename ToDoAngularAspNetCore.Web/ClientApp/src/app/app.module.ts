@@ -20,6 +20,8 @@ import { ToDoComponent } from './to-do/to-do.component';
 import { ToDoDetailComponent } from './to-do-detail/to-do-detail.component';
 import { ToDoCardComponent } from './to-do-card/to-do-card.component';
 import { ModalComponent, ModalContent } from './modal/modal.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -33,7 +35,9 @@ import { ModalComponent, ModalContent } from './modal/modal.component';
     ToDoDetailComponent,
     ToDoCardComponent,
     ModalComponent,
-    ModalContent
+    ModalContent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -51,7 +55,9 @@ import { ModalComponent, ModalContent } from './modal/modal.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'to-do', component: ToDoComponent }
+      { path: 'to-do', component: ToDoComponent },
+      { path: 'register', component: RegisterComponent },
+      { path: 'login', component: LoginComponent }
     ])
   ],
   entryComponents: [
