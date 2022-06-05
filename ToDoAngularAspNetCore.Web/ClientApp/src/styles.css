@@ -49,3 +49,7 @@ body.modal-open {
 .nav-item{
     margin-right: 10px;
 }
+
+.image-logo {
+  height: 79px;
+}

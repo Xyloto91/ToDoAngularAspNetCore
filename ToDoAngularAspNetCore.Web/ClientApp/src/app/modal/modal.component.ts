@@ -1,6 +1,6 @@
 import { Component, Input, Injectable, Inject, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpStatusCode } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToDoModel } from '../../models/to-do-model';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -55,12 +55,12 @@ export class ModalComponent implements OnInit {
 
         this.http.delete<ToDoModel>(this.webApiUrl + 'api/to-do/' + this.toDo?.id, { headers: headers, observe: 'response' }).subscribe(
           result => {
-            if (result.status == 200) {
+            if (result.status == HttpStatusCode.Ok) {
               this.router.navigate(['/']);
             }
             else {
               let snackBarRef = this.snackBar;
-              snackBarRef.open(`Couldn't delete to do data!`);
+              snackBarRef.open(`Couldn't delete data!`);
             }
           },
           error => console.error(error));

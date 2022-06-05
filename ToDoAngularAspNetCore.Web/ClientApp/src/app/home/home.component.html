@@ -1,38 +1,49 @@
 <p *ngIf="!toDos"><em>Loading...</em></p>
 
 <section class="section centerize">
-  <div *ngIf="toDos?.length == 0">
-    <h2>Feel so empty, please add your first to do task :)</h2>
-  </div>
-  <div class="container-grid">
-    <div *ngFor="let toDo of toDos">
-      <app-to-do-card [toDo]="toDo"></app-to-do-card>
+  <div *ngIf="authService.isUserAuthenticated()">
+    <div *ngIf="toDos?.length == 0">
+      <h2>Feel so empty, please add your first to do task :)</h2>
     </div>
-    <div>
-      <div class="card" style="background-color: #f8f8f8">
-        <header class="card-header">
-          <p class="card-header-title">
-            Add new to do
-          </p>
-        </header>
-        <div class="card-content">
-          <div class="content">
-            <br />
-            <br />
-            <label class="checkbox" style="margin-left:20px">
-              <input type="hidden">
-            </label>
-          </div>
-        </div>
-        <footer class="card-footer centerize">
-          <div class="field is-grouped">
-            <p class="control">
-              <a class="button is-primary card-footer-item" [routerLink]="'/to-do'">Add new</a>
+    <div class="container-grid">
+      <div *ngFor="let toDo of toDos">
+        <app-to-do-card [toDo]="toDo"></app-to-do-card>
+      </div>
+      <div>
+        <div class="card" style="background-color: #f8f8f8">
+          <header class="card-header">
+            <p class="card-header-title">
+              Add new to do
             </p>
+          </header>
+          <div class="card-content">
+            <div class="content">
+              <br />
+              <br />
+              <label class="checkbox" style="margin-left:20px">
+                <input type="hidden">
+              </label>
+            </div>
           </div>
-        </footer>
+          <footer class="card-footer centerize">
+            <div class="field is-grouped">
+              <p class="control">
+                <a class="button is-primary card-footer-item" [routerLink]="'/to-do'">Add new</a>
+              </p>
+            </div>
+          </footer>
+        </div>
       </div>
     </div>
+  </div>
+  <div *ngIf="!authService.isUserAuthenticated()">
+    <img src="/assets/images/logo-to-do.png" class="image-logo" alt="">
+    <h2>Create To do list for your daily tasks :)</h2>
+    <p>
+      Become focused, organized, and calm with best To do list application.
+      <br />
+      The world’s #1 task manager and to-do list app.
+    </p>
   </div>
 </section>
 

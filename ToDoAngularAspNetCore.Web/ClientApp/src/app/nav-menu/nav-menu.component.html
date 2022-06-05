@@ -16,20 +16,20 @@
       <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end"
            [ngClass]="{ show: isExpanded }">
         <ul class="navbar-nav flex-grow">
-          <li class="nav-item"
+          <li class="nav-item" *ngIf="!authService.isUserAuthenticated()"
               [routerLinkActive]="['link-active']"
               [routerLinkActiveOptions]="{ exact: true }">
             <a class="nav-link text-dark button is-primary" [routerLink]="['/login']">Login</a>
           </li>
-          <li class="nav-item"
+          <li class="nav-item" *ngIf="!authService.isUserAuthenticated()"
               [routerLinkActive]="['link-active']"
               [routerLinkActiveOptions]="{ exact: true }">
             <a class="nav-link text-dark button is-primary" [routerLink]="['/register']">Register</a>
           </li>
-          <li class="nav-item"
+          <li class="nav-item" *ngIf="authService.isUserAuthenticated()"
               [routerLinkActive]="['link-active']"
               [routerLinkActiveOptions]="{ exact: true }">
-            <a class="nav-link text-dark button is-primary" [routerLink]="['/']" (click)="logout()">Logout</a>
+            <a class="nav-link text-dark button is-primary" [routerLink]="['/']" (click)="authService.logout()">Logout</a>
           </li>
         </ul>
       </div>

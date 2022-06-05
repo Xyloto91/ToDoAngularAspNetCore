@@ -22,6 +22,7 @@ import { ToDoCardComponent } from './to-do-card/to-do-card.component';
 import { ModalComponent, ModalContent } from './modal/modal.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { AuthenticationService } from '../services/authentication/authentication.service';
 
 
 @NgModule({
@@ -63,7 +64,7 @@ import { LoginComponent } from './login/login.component';
   entryComponents: [
     ModalComponent
   ],
-  providers: [Window, { provide: MAT_DATE_LOCALE, useValue: 'hr' }, { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500, verticalPosition: 'top' } }],
+  providers: [Window, AuthenticationService, { provide: MAT_DATE_LOCALE, useValue: 'hr' }, { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500, verticalPosition: 'top' } }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

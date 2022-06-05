@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, Input } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpStatusCode } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ToDoModel } from '../../models/to-do-model';
@@ -35,7 +35,7 @@ export class ToDoComponent implements OnInit {
       this.http.put<ToDoModel>(this.webApiUrl + 'api/to-do', this.toDo, { headers: headers, observe: 'response' }).subscribe(
         result => {
           let snackBarRef = this.snackBar;
-          if (result.status == 200) {
+          if (result.status == HttpStatusCode.Ok) {
             snackBarRef.open(`To do with title '${this.toDo?.title}' successfully updated.`);
           }
           else {
@@ -48,7 +48,7 @@ export class ToDoComponent implements OnInit {
       this.http.post<ToDoModel>(this.webApiUrl + 'api/to-do', this.toDo, { headers: headers, observe: 'response' }).subscribe(
         result => {
           let snackBarRef = this.snackBar;
-          if (result.status == 200) {
+          if (result.status == HttpStatusCode.Ok) {
             snackBarRef.open(`To do with title '${this.toDo?.title}' successfully created.`);
           }
           else {
