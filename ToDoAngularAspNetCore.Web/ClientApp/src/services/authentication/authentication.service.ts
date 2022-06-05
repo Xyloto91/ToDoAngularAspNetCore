@@ -10,7 +10,7 @@ import { RegisterModel } from '../../models/register-model';
 })
 export class AuthenticationService {
 
-  isAuthenticated: boolean = false;
+  private isAuthenticated: boolean = JSON.parse(localStorage.getItem('loggedIn') || 'false');
   webApiUrl: string = '';
   constructor(private http: HttpClient, private router: Router, private snackBar: MatSnackBar, @Inject('WEB_API_URL') webApiUrl: string) {
     this.webApiUrl = webApiUrl;
@@ -40,7 +40,7 @@ export class AuthenticationService {
     this.http.post<LoginModel>(this.webApiUrl + 'api/account/login', loginModel, { headers: headers, observe: 'response' })
       .subscribe(result => {
         if (result.status == HttpStatusCode.Ok) {
-          this.isAuthenticated = true;
+          localStorage.setItem('loggedIn', 'true');
           this.router.navigate(['/']);
         }
         else {
@@ -58,7 +58,7 @@ export class AuthenticationService {
     this.http.post<HttpResponse<void>>(this.webApiUrl + 'api/account/logout', null, { headers: headers, observe: 'response' })
       .subscribe(result => {
         if (result.status == HttpStatusCode.Ok) {
-          this.isAuthenticated = false;
+          localStorage.setItem('loggedIn', 'false');
           this.router.navigate(['/']);
         }
         else {
@@ -70,7 +70,7 @@ export class AuthenticationService {
   }
 
   isUserAuthenticated(): boolean {
-    return this.isAuthenticated;
+    return JSON.parse(localStorage.getItem('loggedIn') || this.isAuthenticated.toString());
   }
 
 }
