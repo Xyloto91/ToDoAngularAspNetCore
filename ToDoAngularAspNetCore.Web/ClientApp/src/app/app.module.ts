@@ -23,6 +23,7 @@ import { ModalComponent, ModalContent } from './modal/modal.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { AuthenticationService } from '../services/authentication/authentication.service';
+import { Constants } from './config/constants';
 
 
 @NgModule({
@@ -64,7 +65,7 @@ import { AuthenticationService } from '../services/authentication/authentication
   entryComponents: [
     ModalComponent
   ],
-  providers: [Window, AuthenticationService, { provide: MAT_DATE_LOCALE, useValue: 'hr' }, { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500, verticalPosition: 'top' } }],
+  providers: [Window, AuthenticationService, Constants, { provide: MAT_DATE_LOCALE, useValue: 'hr' }, { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500, verticalPosition: 'top' } }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

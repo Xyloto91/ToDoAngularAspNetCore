@@ -1,9 +1,10 @@
-import { Component, Inject, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpStatusCode } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ToDoModel } from '../../models/to-do-model';
 import { ModalComponent } from '../modal/modal.component';
+import { Constants } from '../config/constants';
 
 @Component({
   selector: 'app-to-do',
@@ -14,10 +15,9 @@ import { ModalComponent } from '../modal/modal.component';
 export class ToDoComponent implements OnInit {
   @Input() toDo: ToDoModel;
 
-  webApiUrl = '';
+  private apiUrl: string = this.constants.WEB_API_BASE_URL + this.constants.API_TO_DO_ENDPOINT;
 
-  constructor(private http: HttpClient, private snackBar: MatSnackBar, private router: Router, private modalComponent: ModalComponent, @Inject('WEB_API_URL') webApiUrl: string) {
-    this.webApiUrl = webApiUrl;
+  constructor(private http: HttpClient, private snackBar: MatSnackBar, private router: Router, private modalComponent: ModalComponent, private constants: Constants) {
     this.toDo = window.history.state['toDo'];
   }
 
@@ -32,7 +32,7 @@ export class ToDoComponent implements OnInit {
     headers.set('Content-Type', 'application/json');
 
     if (this.toDo.id) {
-      this.http.put<ToDoModel>(this.webApiUrl + 'api/to-do', this.toDo, { headers: headers, observe: 'response' }).subscribe(
+      this.http.put<ToDoModel>(this.apiUrl, this.toDo, { headers: headers, observe: 'response' }).subscribe(
         result => {
           let snackBarRef = this.snackBar;
           if (result.status == HttpStatusCode.Ok) {
@@ -45,7 +45,7 @@ export class ToDoComponent implements OnInit {
         error => console.error(error));
     }
     else {
-      this.http.post<ToDoModel>(this.webApiUrl + 'api/to-do', this.toDo, { headers: headers, observe: 'response' }).subscribe(
+      this.http.post<ToDoModel>(this.apiUrl, this.toDo, { headers: headers, observe: 'response' }).subscribe(
         result => {
           let snackBarRef = this.snackBar;
           if (result.status == HttpStatusCode.Ok) {

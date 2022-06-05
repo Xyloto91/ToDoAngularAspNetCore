@@ -1,9 +1,10 @@
-import { Component, Input, Injectable, Inject, OnInit } from '@angular/core';
+import { Component, Input, Injectable, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient, HttpHeaders, HttpStatusCode } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToDoModel } from '../../models/to-do-model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Constants } from '../config/constants';
 
 @Component({
   selector: 'app-modal-content',
@@ -37,9 +38,10 @@ export class ModalContent {
 })
 export class ModalComponent implements OnInit {
   toDo?: ToDoModel;
-  webApiUrl = '';
 
-  constructor(private modalService: NgbModal, private http: HttpClient, private router: Router, private snackBar: MatSnackBar, @Inject('WEB_API_URL') webApiUrl: string) { this.webApiUrl = webApiUrl; }
+  private apiUrl: string = this.constants.WEB_API_BASE_URL + this.constants.API_TO_DO_ENDPOINT;
+
+  constructor(private modalService: NgbModal, private http: HttpClient, private router: Router, private snackBar: MatSnackBar, private constants: Constants) {}
 
   ngOnInit() {
     
@@ -53,7 +55,7 @@ export class ModalComponent implements OnInit {
         const headers: HttpHeaders = new HttpHeaders();
         headers.set('Content-Type', 'application/json');
 
-        this.http.delete<ToDoModel>(this.webApiUrl + 'api/to-do/' + this.toDo?.id, { headers: headers, observe: 'response' }).subscribe(
+        this.http.delete<ToDoModel>(this.apiUrl + '/' + this.toDo?.id, { headers: headers, observe: 'response' }).subscribe(
           result => {
             if (result.status == HttpStatusCode.Ok) {
               this.router.navigate(['/']);

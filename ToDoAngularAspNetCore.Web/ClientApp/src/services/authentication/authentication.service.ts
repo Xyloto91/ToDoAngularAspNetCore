@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders, HttpResponse, HttpStatusCode } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Constants } from '../../app/config/constants';
 import { LoginModel } from '../../models/login-model';
 import { RegisterModel } from '../../models/register-model';
 
@@ -11,16 +12,16 @@ import { RegisterModel } from '../../models/register-model';
 export class AuthenticationService {
 
   private isAuthenticated: boolean = JSON.parse(localStorage.getItem('loggedIn') || 'false');
-  webApiUrl: string = '';
-  constructor(private http: HttpClient, private router: Router, private snackBar: MatSnackBar, @Inject('WEB_API_URL') webApiUrl: string) {
-    this.webApiUrl = webApiUrl;
-  }
+
+  private apiUrl: string = this.constants.WEB_API_BASE_URL + this.constants.API_ACCOUNT_ENDPOINT;
+
+  constructor(private http: HttpClient, private router: Router, private snackBar: MatSnackBar, private constants: Constants) {}
 
   register(registerModel: RegisterModel): void {
     const headers: HttpHeaders = new HttpHeaders();
     headers.set('Content-Type', 'application/json');
 
-    this.http.post<RegisterModel>(this.webApiUrl + 'api/account/register', registerModel, { headers: headers, observe: 'response' })
+    this.http.post<RegisterModel>(this.apiUrl + '/register', registerModel, { headers: headers, observe: 'response' })
       .subscribe(result => {
         if (result.status == HttpStatusCode.Ok) {
           this.router.navigate(['/login']);
@@ -37,7 +38,7 @@ export class AuthenticationService {
     const headers: HttpHeaders = new HttpHeaders();
     headers.set('Content-Type', 'application/json');
 
-    this.http.post<LoginModel>(this.webApiUrl + 'api/account/login', loginModel, { headers: headers, observe: 'response' })
+    this.http.post<LoginModel>(this.apiUrl + '/login', loginModel, { headers: headers, observe: 'response' })
       .subscribe(result => {
         if (result.status == HttpStatusCode.Ok) {
           localStorage.setItem('loggedIn', 'true');
@@ -55,7 +56,7 @@ export class AuthenticationService {
     const headers: HttpHeaders = new HttpHeaders();
     headers.set('Content-Type', 'application/json');
 
-    this.http.post<HttpResponse<void>>(this.webApiUrl + 'api/account/logout', null, { headers: headers, observe: 'response' })
+    this.http.post<HttpResponse<void>>(this.apiUrl + '/logout', null, { headers: headers, observe: 'response' })
       .subscribe(result => {
         if (result.status == HttpStatusCode.Ok) {
           localStorage.setItem('loggedIn', 'false');
