@@ -12,7 +12,7 @@ namespace ToDoAngularAspNetCore.Infrastructure.Data
     //EntityFrameworkCore\Update-Database
     public class ToDoAngularDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, int>
     {
-        public DbSet<ToDo> ToDos { get; set; }
+        public DbSet<ToDo>? ToDos { get; set; }
 
         public ToDoAngularDbContext(DbContextOptions<ToDoAngularDbContext> options) : base(options)
         {

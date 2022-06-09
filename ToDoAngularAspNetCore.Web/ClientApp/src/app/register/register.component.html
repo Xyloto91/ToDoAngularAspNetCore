@@ -4,6 +4,11 @@
       <label class="label">E-Mail</label>
       <div class="control">
         <input class="input" type="text" required placeholder="Enter e-Mail" [(ngModel)]="register.email" name="email" />
+        <!--<div *ngIf="register.email.invalid && (register.email.dirty || register.email.touched)" class="alert">
+          <div *ngIf="register.email.errors?.['required']">
+            E-mail is required.
+          </div>
+        </div>-->
       </div>
     </div>
 
@@ -11,6 +16,35 @@
       <label class="label">Password</label>
       <div class="control">
         <input class="input" type="password" required placeholder="Enter password" [(ngModel)]="register.password" name="password" />
+        <!--<div *ngIf="register.password.invalid && (register.password.dirty || register.password.touched)" class="alert">
+          <div *ngIf="register.password.errors?.['required']">
+            Password is required.
+          </div>
+        </div>-->
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">First name</label>
+      <div class="control">
+        <input class="input" type="text" required placeholder="Enter first name" [(ngModel)]="register.firstName" name="firstName" />
+        <!--<div *ngIf="register.firstName.invalid && (register.firstName.dirty || register.firstName.touched)" class="alert">
+          <div *ngIf="register.firstName.errors?.['required']">
+            First name is required.
+          </div>
+        </div>-->
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Last name</label>
+      <div class="control">
+        <input class="input" type="text" required placeholder="Enter last name" [(ngModel)]="register.lastName" name="lastName" />
+        <!--<div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert">
+          <div *ngIf="lastName.errors?.['required']">
+            Name is required.
+          </div>
+        </div>-->
       </div>
     </div>
 

@@ -9,15 +9,16 @@ namespace ToDoAngularAspNetCore.Core.Entities
 {
     public class ApplicationUser : IdentityUser<int>
     {
-        public ApplicationUser()
-        {
+        public string FirstName { get; set; }
 
-        }
+        public string LastName { get; set; }
 
-        public ApplicationUser(string email)
+        public ApplicationUser(string email, string firstName, string lastName)
         {
             Email = email;
             UserName = email;
+            FirstName = firstName;
+            LastName = lastName;
         }
     }
 

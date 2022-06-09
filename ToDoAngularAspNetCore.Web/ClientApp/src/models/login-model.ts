@@ -1,5 +1,9 @@
-import { RegisterModel } from "./register-model";
+export class LoginModel {
+  email: string;
+  password: string;
 
-export class LoginModel extends RegisterModel {
-
+  constructor(email: string, password: string) {
+    this.email = email;
+    this.password = password;
+  }
 }

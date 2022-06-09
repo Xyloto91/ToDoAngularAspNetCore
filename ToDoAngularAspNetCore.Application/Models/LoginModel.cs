@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace ToDoAngularAspNetCore.Application.Models
 {
-    public class LoginModel : RegisterModel
+    public class LoginModel
     {
+        public string Email { get; set; } = string.Empty;
+
+        public string Password { get; set; } = string.Empty;
     }
 }

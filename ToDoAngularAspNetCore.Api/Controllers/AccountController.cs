@@ -23,7 +23,7 @@ namespace ToDoAngularAspNetCore.Api.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterModel registerModel)
         {
-            var result = await _userManager.CreateAsync(new ApplicationUser(registerModel.Email), registerModel.Password);
+            var result = await _userManager.CreateAsync(new ApplicationUser(registerModel.Email, registerModel.FirstName, registerModel.LastName), registerModel.Password);
 
             if (result.Succeeded)
             {
