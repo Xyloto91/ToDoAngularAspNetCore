@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace ToDoAngularAspNetCore.Core.Entities
 {
-    public class ApplicationUser : IdentityUser
+    public class ApplicationUser : IdentityUser<int>
     {
         public ApplicationUser()
         {
@@ -19,5 +19,10 @@ namespace ToDoAngularAspNetCore.Core.Entities
             Email = email;
             UserName = email;
         }
+    }
+
+    public class ApplicationRole : IdentityRole<int>
+    {
+
     }
 }
