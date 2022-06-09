@@ -37,6 +37,9 @@ namespace ToDoAngularAspNetCore.Api.Controllers
         public async Task<IActionResult> Login(LoginModel loginModel)
         {
             var appUser = await _userManager.FindByEmailAsync(loginModel.Email);
+
+            if (appUser == null) return BadRequest("User not registered!");
+
             var result = await _signInManager.PasswordSignInAsync(appUser.UserName, loginModel.Password, false, false);
 
             if (result.Succeeded)
