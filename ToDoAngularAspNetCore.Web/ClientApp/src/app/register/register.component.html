@@ -3,48 +3,60 @@
     <div class="field">
       <label class="label">E-Mail</label>
       <div class="control">
-        <input class="input" type="text" required placeholder="Enter e-Mail" [(ngModel)]="register.email" name="email" />
-        <!--<div *ngIf="register.email.invalid && (register.email.dirty || register.email.touched)" class="alert">
-          <div *ngIf="register.email.errors?.['required']">
+        <input class="input form-control" type="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="Enter e-Mail" #email="ngModel" [(ngModel)]="register.email" name="email" />
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert">
+          <div *ngIf="email.errors?.['required']">
             E-mail is required.
           </div>
-        </div>-->
+          <div *ngIf="email.errors?.['pattern']">
+            E-mail is not in valid format.
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="field">
       <label class="label">Password</label>
       <div class="control">
-        <input class="input" type="password" required placeholder="Enter password" [(ngModel)]="register.password" name="password" />
-        <!--<div *ngIf="register.password.invalid && (register.password.dirty || register.password.touched)" class="alert">
-          <div *ngIf="register.password.errors?.['required']">
+        <input class="input form-control" type="password" required minlength="8" placeholder="Enter password" #password="ngModel" [(ngModel)]="register.password" name="password" />
+        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert">
+          <div *ngIf="password.errors?.['required']">
             Password is required.
           </div>
-        </div>-->
+          <div *ngIf="password.errors?.['minlength']">
+            Password must be at least 8 characters long.
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="field">
       <label class="label">First name</label>
       <div class="control">
-        <input class="input" type="text" required placeholder="Enter first name" [(ngModel)]="register.firstName" name="firstName" />
-        <!--<div *ngIf="register.firstName.invalid && (register.firstName.dirty || register.firstName.touched)" class="alert">
-          <div *ngIf="register.firstName.errors?.['required']">
+        <input class="input form-control" type="text" required minlength="3" placeholder="Enter first name" #firstName="ngModel" [(ngModel)]="register.firstName" name="firstName" />
+        <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert">
+          <div *ngIf="firstName.errors?.['required']">
             First name is required.
           </div>
-        </div>-->
+          <div *ngIf="firstName.errors?.['minlength']">
+            First name must be at least 3 characters long.
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="field">
       <label class="label">Last name</label>
       <div class="control">
-        <input class="input" type="text" required placeholder="Enter last name" [(ngModel)]="register.lastName" name="lastName" />
-        <!--<div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert">
+        <input class="input form-control" type="text" required minlength="3" placeholder="Enter last name" #lastName="ngModel" [(ngModel)]="register.lastName" name="lastName" />
+        <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert">
           <div *ngIf="lastName.errors?.['required']">
-            Name is required.
+            Last name is required.
           </div>
-        </div>-->
+          <div *ngIf="lastName.errors?.['minlength']">
+            Last name must be at least 3 characters long.
+          </div>
+        </div>
       </div>
     </div>
 
