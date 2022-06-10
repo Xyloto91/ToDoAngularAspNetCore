@@ -18,13 +18,16 @@
     <div class="field">
       <label class="label">Password</label>
       <div class="control">
-        <input class="input form-control" type="password" required minlength="8" placeholder="Enter password" #password="ngModel" [(ngModel)]="register.password" name="password" />
+        <input class="input form-control" type="password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,}$" minlength="8" placeholder="Enter password" #password="ngModel" [(ngModel)]="register.password" name="password" />
         <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert">
           <div *ngIf="password.errors?.['required']">
             Password is required.
           </div>
           <div *ngIf="password.errors?.['minlength']">
             Password must be at least 8 characters long.
+          </div>
+          <div *ngIf="password.errors?.['pattern'] && !password.errors?.['minlength']">
+            Password is not valid, please enter at least one uppercase, lowercase, number and special letter.
           </div>
         </div>
       </div>
