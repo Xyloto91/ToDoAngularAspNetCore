@@ -1,5 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginModel } from '../../models/login-model';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
@@ -11,9 +10,11 @@ import { AuthenticationService } from '../../services/authentication/authenticat
 })
 export class LoginComponent implements OnInit {
   @Input() login: LoginModel;
-
-  constructor(private authService: AuthenticationService) {
+  public loggedIn: boolean;
+  
+  constructor(private authService: AuthenticationService, private router: Router) {
     this.login = window.history.state['login'];
+    this.loggedIn = true;
   }
 
   ngOnInit(): void {
@@ -22,6 +23,9 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     this.authService.login(this.login);
+    if (!this.authService.isUserAuthenticated()) {
+      this.loggedIn = false;
+    }
   }
 
 }

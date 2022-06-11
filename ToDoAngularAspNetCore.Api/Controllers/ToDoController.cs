@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ToDoAngularAspNetCore.Application.Models;
 using ToDoAngularAspNetCore.Application.Services;
 
@@ -6,6 +7,7 @@ namespace ToDoAngularAspNetCore.Api.Controllers
 {
     [ApiController]
     [Route("api/to-do")]
+    [Authorize]
     public class ToDoController : ControllerBase
     {
         private readonly ToDoService _toDoService;

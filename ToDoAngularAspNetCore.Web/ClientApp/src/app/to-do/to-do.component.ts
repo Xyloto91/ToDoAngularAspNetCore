@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ToDoModel } from '../../models/to-do-model';
 import { ModalComponent } from '../modal/modal.component';
 import { Constants } from '../config/constants';
+import { AuthenticationService } from '../../services/authentication/authentication.service';
 
 @Component({
   selector: 'app-to-do',
@@ -17,11 +18,15 @@ export class ToDoComponent implements OnInit {
 
   private apiUrl: string = this.constants.WEB_API_BASE_URL + this.constants.API_TO_DO_ENDPOINT;
 
-  constructor(private http: HttpClient, private snackBar: MatSnackBar, private router: Router, private modalComponent: ModalComponent, private constants: Constants) {
+  constructor(private http: HttpClient, public authService: AuthenticationService, private snackBar: MatSnackBar, private router: Router, private modalComponent: ModalComponent, private constants: Constants) {
     this.toDo = window.history.state['toDo'];
   }
 
   ngOnInit(): void {
+    if (!this.authService.isUserAuthenticated()) {
+      this.router.navigate(['/login']);
+    }
+
     if (!this.toDo) {
       this.toDo = new ToDoModel('', '', new Date(), false, undefined);
     }
