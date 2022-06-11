@@ -17,7 +17,7 @@
     <div class="field is-grouped">
       <div class="control">
         <input type="submit" class="button is-link" value="Login" [disabled]="form.invalid" />
-        <div *ngIf="!loggedIn">
+        <div *ngIf="loginFailed">
           Invalid username or password
         </div>
       </div>

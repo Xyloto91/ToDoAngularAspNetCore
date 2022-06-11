@@ -10,11 +10,11 @@ import { AuthenticationService } from '../../services/authentication/authenticat
 })
 export class LoginComponent implements OnInit {
   @Input() login: LoginModel;
-  public loggedIn: boolean;
+  public loginFailed: boolean;
   
   constructor(private authService: AuthenticationService, private router: Router) {
     this.login = window.history.state['login'];
-    this.loggedIn = true;
+    this.loginFailed = false;
   }
 
   ngOnInit(): void {
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     this.authService.login(this.login);
     if (!this.authService.isUserAuthenticated()) {
-      this.loggedIn = false;
+      this.loginFailed = true;
     }
   }
 
