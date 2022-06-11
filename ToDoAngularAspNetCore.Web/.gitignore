@@ -229,3 +229,6 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+
+# For gitignore use .gitignore in solution folder
+# source\repos\ToDoAngularAspNetCore\.gitignore
