@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /ToDoAngularAspNetCore/ClientApp/.angular/cache/
 /ToDoAngularAspNetCore.Web/ClientApp/.angular/cache/13.3.5
+/ToDoAngularAspNetCore.Web/ClientApp/.angular/cache/angular-webpack/
