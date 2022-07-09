@@ -33,7 +33,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors(options => options.WithOrigins("https://localhost:44426")
                               .AllowAnyMethod()
-                              .AllowAnyHeader());
+                              .AllowAnyHeader()
+                              .AllowCredentials());
 
 app.UseHttpsRedirection();
 

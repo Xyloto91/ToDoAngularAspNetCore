@@ -28,7 +28,7 @@ export class ToDoComponent implements OnInit {
     }
 
     if (!this.toDo) {
-      this.toDo = new ToDoModel('', '', new Date(), false, undefined);
+      this.toDo = new ToDoModel(0, '', '', new Date(), false, undefined);
     }
   }
 
@@ -37,7 +37,7 @@ export class ToDoComponent implements OnInit {
     headers.set('Content-Type', 'application/json');
 
     if (this.toDo.id) {
-      this.http.put<ToDoModel>(this.apiUrl, this.toDo, { headers: headers, observe: 'response' }).subscribe(
+      this.http.put<ToDoModel>(this.apiUrl, this.toDo, { headers: headers, observe: 'response', withCredentials: true }).subscribe(
         result => {
           let snackBarRef = this.snackBar;
           if (result.status == HttpStatusCode.Ok) {
@@ -50,7 +50,8 @@ export class ToDoComponent implements OnInit {
         error => console.error(error));
     }
     else {
-      this.http.post<ToDoModel>(this.apiUrl, this.toDo, { headers: headers, observe: 'response' }).subscribe(
+      this.toDo.userId = this.authService.getCurrentUserId();
+      this.http.post<ToDoModel>(this.apiUrl, this.toDo, { headers: headers, observe: 'response', withCredentials: true }).subscribe(
         result => {
           let snackBarRef = this.snackBar;
           if (result.status == HttpStatusCode.Ok) {

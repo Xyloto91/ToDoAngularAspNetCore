@@ -1,26 +1,32 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ToDoAngularAspNetCore.Application.Models;
 using ToDoAngularAspNetCore.Application.Services;
+using ToDoAngularAspNetCore.Core.Entities;
 
 namespace ToDoAngularAspNetCore.Api.Controllers
 {
-    [ApiController]
     [Route("api/to-do")]
+    [ApiController]
     [Authorize]
     public class ToDoController : ControllerBase
     {
         private readonly ToDoService _toDoService;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private int _userId;
 
-        public ToDoController(ToDoService toDoService)
+        public ToDoController(ToDoService toDoService, UserManager<ApplicationUser> userManager)
         {
             _toDoService = toDoService;
+            _userManager = userManager;
         }
 
         [HttpGet()]
         public async Task<IActionResult> GetAll()
         {
-            return Ok(await _toDoService.GetToDos());
+            int.TryParse(_userManager?.GetUserId(HttpContext?.User), out _userId);
+            return Ok(await _toDoService.GetToDos(_userId));
         }
 
         [HttpGet("{id}")]

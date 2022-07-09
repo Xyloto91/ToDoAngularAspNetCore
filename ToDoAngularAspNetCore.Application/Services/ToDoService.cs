@@ -44,9 +44,9 @@ namespace ToDoAngularAspNetCore.Application.Services
             return mapped;
         }
 
-        public async Task<IEnumerable<ToDoModel>> GetToDos()
+        public async Task<IEnumerable<ToDoModel>> GetToDos(int userId)
         {
-            var toDoList = await _toDoRepository.GetAllAsync();
+            var toDoList = await _toDoRepository.GetAllAsync(userId);
             var mapped = ObjectMapper.Mapper.Map<IEnumerable<ToDoModel>>(toDoList);
             return mapped;
         }

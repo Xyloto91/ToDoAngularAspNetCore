@@ -17,20 +17,21 @@ export class HomeComponent implements OnInit {
   constructor(private http: HttpClient, public authService: AuthenticationService, private snackBar: MatSnackBar, private constants: Constants) {}
 
   ngOnInit(): void {
-    const headers: HttpHeaders = new HttpHeaders();
-    headers.set('Content-Type', 'application/json');
 
-    this.http.get<ToDoModel[]>(this.apiUrl, { headers: headers, observe: 'response' }).subscribe(result => {
+    if (this.authService.isUserAuthenticated()) {
+      const headers: HttpHeaders = new HttpHeaders();
+      headers.set('Content-Type', 'application/json');
+
+      this.http.get<ToDoModel[]>(this.apiUrl, { headers: headers, observe: 'response', withCredentials: true }).subscribe(result => {
         if (result) {
           if (result.status == HttpStatusCode.Ok) {
             this.toDos = result.body;
-          }
-          else {
-            let snackBarRef = this.snackBar;
-            snackBarRef.open(`Couldn't get all to dos.`);
           }
         }
       },
         error => console.error(error));
     }
+  }
+
+    
 }

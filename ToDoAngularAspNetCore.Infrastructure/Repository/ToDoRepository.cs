@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using ToDoAngularAspNetCore.Core.Entities;
 using ToDoAngularAspNetCore.Core.Repositories;
 using ToDoAngularAspNetCore.Infrastructure.Data;
@@ -28,9 +29,9 @@ namespace ToDoAngularAspNetCore.Infrastructure.Repository
             await _toDoAngularDbContext.SaveChangesAsync();
         }
 
-        public async Task<List<ToDo>> GetAllAsync()
+        public async Task<List<ToDo>> GetAllAsync(int userId)
         {
-            return await _toDoAngularDbContext.ToDos.ToListAsync();
+            return await _toDoAngularDbContext.ToDos.Where(x => x.UserId == userId).ToListAsync();
         }
 
         public async Task<ToDo?> GetByIdAsync(int id)

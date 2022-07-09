@@ -9,7 +9,7 @@ namespace ToDoAngularAspNetCore.Application.Interfaces
 {
     public interface IToDoService
     {
-        Task<IEnumerable<ToDoModel>> GetToDos();
+        Task<IEnumerable<ToDoModel>> GetToDos(int userId);
         Task<ToDoModel> GetToDoById(int id);
         Task<ToDoModel> Create(ToDoModel toDoModel);
         Task Update(ToDoModel toDoModel);

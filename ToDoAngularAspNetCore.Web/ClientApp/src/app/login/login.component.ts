@@ -22,10 +22,11 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.authService.login(this.login);
-    if (!this.authService.isUserAuthenticated()) {
-      this.loginFailed = true;
-    }
+    this.authService.login(this.login).subscribe(resp => {
+      if (!this.authService.isUserAuthenticated()) {
+        this.loginFailed = true;
+      }
+    });
   }
 
 }
