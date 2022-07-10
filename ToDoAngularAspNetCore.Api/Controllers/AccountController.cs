@@ -43,7 +43,7 @@ namespace ToDoAngularAspNetCore.Api.Controllers
 
             if (result.Succeeded)
             {
-                return Ok(new UserModel { Id = appUser.Id, Email = appUser.Email });
+                return Ok(new UserModel { Id = appUser.Id, Email = appUser.Email, FirstName = appUser.FirstName, LastName = appUser.LastName });
             }
 
             return BadRequest("Invalid login details!");

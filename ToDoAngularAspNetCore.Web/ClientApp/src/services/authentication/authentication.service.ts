@@ -13,7 +13,7 @@ import { UserModel } from '../../models/user-model';
 })
 export class AuthenticationService {
 
-  private user: UserModel = new UserModel(0, "");
+  private user: UserModel = new UserModel(0, '', '', '');
 
   private apiUrl: string = this.constants.WEB_API_BASE_URL + this.constants.API_ACCOUNT_ENDPOINT;
 
@@ -49,7 +49,7 @@ export class AuthenticationService {
       this.http.post<UserModel>(this.apiUrl + '/login', loginModel, { headers: headers, observe: 'response', withCredentials: true })
         .subscribe(result => {
           if (result.status == HttpStatusCode.Ok) {
-            this.user = new UserModel(result.body?.id || 0, result.body?.email || "");
+            this.user = new UserModel(result.body?.id || 0, result.body?.email || '', result.body?.firstName || '', result.body?.lastName || '');
             this.router.navigate(['/']);
           }
           else {
@@ -68,7 +68,7 @@ export class AuthenticationService {
     this.http.post<HttpResponse<void>>(this.apiUrl + '/logout', null, { headers: headers, observe: 'response' })
       .subscribe(result => {
         if (result.status == HttpStatusCode.Ok) {
-          this.user = new UserModel(0, "");
+          this.user = new UserModel(0, '', '', '');
           this.router.navigate(['/']);
         }
         else {
@@ -83,8 +83,12 @@ export class AuthenticationService {
     return this.user && this.user.id > 0;
   }
 
-  getCurrentUserId(): number{
+  getCurrentUserId(): number {
     return this.user.id || 0;
+  }
+
+  getCurrentUserName(): string {
+    return this.user.firstName + ' ' + this.user.lastName;
   }
 
 }

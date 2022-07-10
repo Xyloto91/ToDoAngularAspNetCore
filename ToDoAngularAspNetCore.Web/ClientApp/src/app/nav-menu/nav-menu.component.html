@@ -26,6 +26,11 @@
               [routerLinkActiveOptions]="{ exact: true }">
             <a class="nav-link text-dark button is-primary" [routerLink]="['/register']">Register</a>
           </li>
+          <li class="nav-item" *ngIf="authService.isUserAuthenticated()">
+            <p class="welcome">
+              Welcome {{authService.getCurrentUserName()}}
+            </p>
+          </li>
           <li class="nav-item" *ngIf="authService.isUserAuthenticated()"
               [routerLinkActive]="['link-active']"
               [routerLinkActiveOptions]="{ exact: true }">

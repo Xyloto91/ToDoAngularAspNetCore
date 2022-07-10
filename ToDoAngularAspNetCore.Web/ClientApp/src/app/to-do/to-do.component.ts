@@ -37,7 +37,7 @@ export class ToDoComponent implements OnInit {
     headers.set('Content-Type', 'application/json');
 
     if (this.toDo.id) {
-      this.http.put<ToDoModel>(this.apiUrl, this.toDo, { headers: headers, observe: 'response', withCredentials: true }).subscribe(
+      this.http.put(this.apiUrl, this.toDo, { headers: headers, observe: 'response', withCredentials: true }).subscribe(
         result => {
           let snackBarRef = this.snackBar;
           if (result.status == HttpStatusCode.Ok) {
@@ -51,7 +51,7 @@ export class ToDoComponent implements OnInit {
     }
     else {
       this.toDo.userId = this.authService.getCurrentUserId();
-      this.http.post<ToDoModel>(this.apiUrl, this.toDo, { headers: headers, observe: 'response', withCredentials: true }).subscribe(
+      this.http.post(this.apiUrl, this.toDo, { headers: headers, observe: 'response', withCredentials: true }).subscribe(
         result => {
           let snackBarRef = this.snackBar;
           if (result.status == HttpStatusCode.Ok) {

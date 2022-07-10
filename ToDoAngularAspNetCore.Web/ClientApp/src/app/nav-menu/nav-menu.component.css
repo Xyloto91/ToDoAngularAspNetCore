@@ -16,3 +16,13 @@ html {
 .box-shadow {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
+
+.welcome {
+  padding-top: calc(0.5em - 1px);
+  padding-bottom: calc(0.5em - 1px);
+  display: inline-flex;
+  font-size: 1rem;
+  height: 2.5em;
+  position: relative;
+  vertical-align: top;
+}
