@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using ToDoAngularAspNetCore.Application.Interfaces;
 using ToDoAngularAspNetCore.Application.Services;
 using ToDoAngularAspNetCore.Core.Entities;
+using ToDoAngularAspNetCore.Core.Repositories;
 using ToDoAngularAspNetCore.Infrastructure.Data;
 using ToDoAngularAspNetCore.Infrastructure.Repository;
 
@@ -19,8 +21,8 @@ builder.Services.AddDbContext<ToDoAngularDbContext>(x =>
 builder.Services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<ToDoAngularDbContext>();
 
-builder.Services.AddScoped<ToDoRepository>();
-builder.Services.AddScoped<ToDoService>();
+builder.Services.AddScoped<IToDoRepository, ToDoRepository>();
+builder.Services.AddScoped<IToDoService, ToDoService>();
 
 var app = builder.Build();
 

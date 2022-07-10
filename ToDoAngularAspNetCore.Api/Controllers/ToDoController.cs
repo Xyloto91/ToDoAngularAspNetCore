@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using ToDoAngularAspNetCore.Application.Interfaces;
 using ToDoAngularAspNetCore.Application.Models;
 using ToDoAngularAspNetCore.Application.Services;
 using ToDoAngularAspNetCore.Core.Entities;
@@ -12,11 +13,11 @@ namespace ToDoAngularAspNetCore.Api.Controllers
     [Authorize]
     public class ToDoController : ControllerBase
     {
-        private readonly ToDoService _toDoService;
+        private readonly IToDoService _toDoService;
         private readonly UserManager<ApplicationUser> _userManager;
         private int _userId;
 
-        public ToDoController(ToDoService toDoService, UserManager<ApplicationUser> userManager)
+        public ToDoController(IToDoService toDoService, UserManager<ApplicationUser> userManager)
         {
             _toDoService = toDoService;
             _userManager = userManager;

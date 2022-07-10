@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ToDoAngularAspNetCore.Core.Entities;
 using ToDoAngularAspNetCore.Core.Repositories;

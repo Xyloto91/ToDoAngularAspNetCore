@@ -2,15 +2,16 @@
 using ToDoAngularAspNetCore.Application.Mapper;
 using ToDoAngularAspNetCore.Application.Models;
 using ToDoAngularAspNetCore.Core.Entities;
+using ToDoAngularAspNetCore.Core.Repositories;
 using ToDoAngularAspNetCore.Infrastructure.Repository;
 
 namespace ToDoAngularAspNetCore.Application.Services
 {
     public class ToDoService : IToDoService
     {
-        private readonly ToDoRepository _toDoRepository;
+        private readonly IToDoRepository _toDoRepository;
 
-        public ToDoService(ToDoRepository toDoRepository)
+        public ToDoService(IToDoRepository toDoRepository)
         {
             _toDoRepository = toDoRepository;
         }
