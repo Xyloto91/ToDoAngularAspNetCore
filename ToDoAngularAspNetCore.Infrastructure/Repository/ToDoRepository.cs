@@ -30,7 +30,7 @@ namespace ToDoAngularAspNetCore.Infrastructure.Repository
             await _toDoAngularDbContext.SaveChangesAsync();
         }
 
-        public async Task<List<ToDo>> GetAllAsync(int userId)
+        public async Task<List<ToDo>> GetAllByUserIdAsync(int userId)
         {
             return await _toDoAngularDbContext.ToDos.Where(x => x.UserId == userId).ToListAsync();
         }

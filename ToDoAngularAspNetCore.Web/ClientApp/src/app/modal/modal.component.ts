@@ -55,7 +55,7 @@ export class ModalComponent implements OnInit {
         const headers: HttpHeaders = new HttpHeaders();
         headers.set('Content-Type', 'application/json');
 
-        this.http.delete<ToDoModel>(this.apiUrl + '/' + this.toDo?.id, { headers: headers, observe: 'response' }).subscribe(
+        this.http.delete(this.apiUrl + '/' + this.toDo?.id, { headers: headers, observe: 'response', withCredentials: true }).subscribe(
           result => {
             if (result.status == HttpStatusCode.Ok) {
               this.router.navigate(['/']);

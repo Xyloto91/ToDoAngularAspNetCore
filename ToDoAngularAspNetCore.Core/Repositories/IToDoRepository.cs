@@ -17,6 +17,6 @@ namespace ToDoAngularAspNetCore.Core.Repositories
 
         Task<ToDo?> GetByIdAsync(int id);
 
-        Task<List<ToDo>> GetAllAsync(int userId);
+        Task<List<ToDo>> GetAllByUserIdAsync(int userId);
     }
 }
