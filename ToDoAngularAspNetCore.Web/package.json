@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "todoangularaspnetcore.web": "file:ClientApp"
+  }
+}
