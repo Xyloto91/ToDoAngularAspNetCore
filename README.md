@@ -10,3 +10,7 @@ and execute following commands.
 - EntityFrameworkCore\Update-Database
 
 ![Start page](https://img001.prntscr.com/file/img001/Pml5V1LIQaSey2C4MpeDIQ.jpg)
+
+
+After you register account you will be redirected to login page after successful login
+add new to do tasks :)
